@@ -8,10 +8,11 @@ public class OrderList {
 	private String Shipping;
 	
 	
-	public OrderList (String ProductName, int Amount, String Shipping) {
-		this.ProductName = ProductName;
-		this.Amount = Amount;
-		this.Shipping = Shipping;
+//	public OrderList (String ProductName, int Amount, String Shipping) {
+	public OrderList () {
+//		this.ProductName = ProductName;
+//		this.Amount = Amount;
+//		this.Shipping = Shipping;
 
 		
 	}
