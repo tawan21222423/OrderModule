@@ -1,29 +1,33 @@
 package com.example.demo.object;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Order {
 	
-	private String id;
+	private int id;
 	private int user_id;
-	private List<String> product;
+	private List<OrderList> product;
+	private String status;
+	private String time;
 	
 	public Order() {
 		super();
 	}
 	
-	public Order(String id, int user_id) {
+	public Order(int id, int user_id) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
 		
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -35,17 +39,30 @@ public class Order {
 		this.user_id = user_id;
 	}
 
-	public List<String> getProduct() {
+	public List<OrderList> getProduct() {
 		return product;
 	}
 
-	public void setProduct(List<String> product) {
+	public void setProduct(List<OrderList> product) {
 		this.product = product;
 	}
 
+	public String getStatus() {
+		return status;
+	}
 
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-	
-	
+	public String getTime() {
+		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		   LocalDateTime now = LocalDateTime.now();  
+		return (dtf.format(now));
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
 
 }

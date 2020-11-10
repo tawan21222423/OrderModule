@@ -19,13 +19,13 @@ public class FirebaseServices {
 	
 	public String saveOrderDetails(Order message) throws InterruptedException, ExecutionException {
         Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> future = db.collection("orders").document(message.getId()).set(message);
+        ApiFuture<WriteResult> future = db.collection("orders").document(message.getId()+"").set(message);
         return future.get().getUpdateTime().toString();
     }
 
-	public Order getOrderDetails(String name) throws InterruptedException, ExecutionException {
+	public Order getOrderDetails(int id) throws InterruptedException, ExecutionException {
 		Firestore db = FirestoreClient.getFirestore();
-		DocumentReference docRef = db.collection("orders").document(name);
+		DocumentReference docRef = db.collection("orders").document(id+"");
 	
 		ApiFuture<DocumentSnapshot> future = docRef.get();
 
