@@ -1,0 +1,50 @@
+.Title{
+    margin-top: 10%;
+    font-size: 72px;
+    font-weight: bold;
+}
+.blue{
+    color: rgb(10,132,255);
+}
+.blue:hover{
+    color: rgb(10,132,255);
+    text-decoration: unset;
+
+}
+.TitleList{
+    font-weight: bold;
+    font-size: 36px;
+    margin-left: 40px;
+}
+body{
+    background-image: url('./asset/bg.jpg');
+    background-attachment: fixed;
+}
+.container{
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.content{
+    padding: 30px;
+    margin-bottom: 50px;
+}
+.boxOrder{
+    font-weight: bold;
+    padding: 20px;
+    background-color:rgb(48,209,88);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.boxtitle{
+    font-size: 24px;
+}
+.titleorderlist{
+    margin-bottom: 10px;
+}
+.boxProduct{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
