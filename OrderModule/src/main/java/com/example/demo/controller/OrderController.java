@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,8 +28,8 @@ public class OrderController {
 		return firebaseServices.saveOrderDetails(order);
 	}
 	
-	@GetMapping("/getOrderDetails")
-	public Order getUserDetails(@RequestHeader int id) throws InterruptedException, ExecutionException {
+	@GetMapping("/getOrderDetails/{id}")
+	public Order getUserDetails(@PathVariable("id") int id) throws InterruptedException, ExecutionException {
 		return firebaseServices.getOrderDetails(id);
 	}
 	@PutMapping("/updateOrder")
@@ -36,8 +37,8 @@ public class OrderController {
 		return "Updated order "+order.getId();
 	}
 	
-	@DeleteMapping("/deleteOrder")
-	public String deleteOrder(@RequestHeader int id) throws InterruptedException, ExecutionException {
+	@DeleteMapping("/deleteOrder/{id}")
+	public String deleteOrder(@PathVariable("id") int id) throws InterruptedException, ExecutionException {
 		return firebaseServices.deleteOrder(id);
 	}
 
