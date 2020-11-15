@@ -41,6 +41,11 @@ public class FirebaseServices {
 		  return null;
 		}
 	}
+	public String deleteOrder(int id) throws InterruptedException, ExecutionException {
+		Firestore db = FirestoreClient.getFirestore();
+		ApiFuture<WriteResult> writeResult = db.collection("orders").document(id+"").delete();
+		return writeResult.get().getUpdateTime().toString();
+	}
 	
 
 }
