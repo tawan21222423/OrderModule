@@ -75,8 +75,16 @@ const orderlist = () => {
             {data.map((data) => {
                 return(
                     <div className="boxOrder">
-                        <div className="boxtitle">Order ID : {data.id}</div>
-                        <div className="boxuser">User ID : {data.user_id} Time : {data.time}</div>
+                        <div className="row">
+                            <div className="col-10">
+                                <div className="boxtitle">Order ID : {data.id}</div>
+                                <div className="boxuser">User ID : {data.user_id} Time : {data.time}</div>
+                            </div>
+                            <div>
+                            <button type="button" className="btn btn-warning mr-2">Edit</button>
+                            <button type="button" className="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
                         <hr color='black'/>
                         <div className="titleorderlist">Order List : </div>
                         <div className="row"> {data.product.map((product) => {
