@@ -5,7 +5,8 @@ public class OrderList {
 	private String ProductName;
 	private int Amount;
 	private double Price;
-	private String Shipping;
+	private String shipping;
+
 	
 	
 //	public OrderList (String ProductName, int Amount, String Shipping) {
@@ -42,11 +43,11 @@ public class OrderList {
 	}
 
 	public String getShipping() {
-		return Shipping;
+		return shipping;
 	}
 
 	public void setShipping(String shipping) {
-		Shipping = shipping;
+		this.shipping = shipping;
 	}
 
 
