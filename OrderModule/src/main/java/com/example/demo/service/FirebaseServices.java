@@ -1,17 +1,23 @@
 package com.example.demo.service;
 
 import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.stereotype.Service;
 
 import com.example.demo.object.Order;
 import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.core.Path;
 
 @Service
@@ -41,11 +47,35 @@ public class FirebaseServices {
 		  return null;
 		}
 	}
+	
+	public List<Order> getUserOrderDetail(int user_id) throws InterruptedException, ExecutionException {
+		int n = user_id;
+		Firestore db = FirestoreClient.getFirestore();
+		List<Order> orList = new ArrayList<Order>();
+		ApiFuture<QuerySnapshot> future =
+			    db.collection("orders").whereEqualTo("user_id", n).get();
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			for (DocumentSnapshot document : documents) {
+			  System.out.println(document.getId() + " => " + document.toObject(Order.class));
+			  Order or = document.toObject(Order.class);
+				orList.add(or);
+			}
+			if (orList.isEmpty()) {
+				System.out.println("No such document!");
+				return null;
+			}else{	
+				return orList;
+			}
+	}
+	
 	public String deleteOrder(int id) throws InterruptedException, ExecutionException {
 		Firestore db = FirestoreClient.getFirestore();
 		ApiFuture<WriteResult> writeResult = db.collection("orders").document(id+"").delete();
 		return writeResult.get().getUpdateTime().toString();
 	}
 	
+	public Firestore getFirebase() {
+		return FirestoreClient.getFirestore();
+	}
 
 }

@@ -9,7 +9,7 @@ public class Order {
 	private int id;
 	private int user_id;
 	private List<OrderList> product;
-	private String status;
+	private String status = "Waiting";
 	private String time;
 	
 	public Order() {
