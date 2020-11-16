@@ -56,9 +56,13 @@ public class Order {
 	}
 
 	public String getTime() {
+		if (this.time == "") {
 		 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		   LocalDateTime now = LocalDateTime.now();  
 		return (dtf.format(now));
+		}else {
+			return time;
+		}
 	}
 
 	public void setTime(String time) {
