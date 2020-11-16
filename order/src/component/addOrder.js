@@ -41,6 +41,7 @@ const Orderlist = (props) => {
         product: productList
       }
       setorderbig(set);
+      console.log(orderbig)
       axios.post('http://localhost:8080/createOrder', orderbig)
       .then(res => {
         console.log(res);

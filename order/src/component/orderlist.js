@@ -12,7 +12,7 @@ const Orderlist = (props) => {
     axios.get('http://localhost:8080/AllOrder').then((response) => {
         setdata(response.data)
         setisloaded(true);
-        console.log(data);
+        console.log(response.data);
     })
     }, []);
     if (isloaded){
@@ -20,16 +20,16 @@ const Orderlist = (props) => {
     <div>
       <div className="content">
         <p className="TitleList">List Order</p>
-      {data.map((data) => {
+      {data.map((datas) => {
         return (
           <div className="boxOrder bg-secondary">
               <Accordion defaultActiveKey="0">
 
             <div className="row headorder">
               <div className="col-10">
-                <div className="boxtitle">Order ID : {data.id}</div>
+                <div className="boxtitle">Order ID : {datas.id}</div>
                 <div className="boxuser">
-                  User ID : {data.user_id} Time : {data.time}
+                  User ID : {datas.user_id} Time : {datas.time}
                 </div>
               </div>
               <div className='col-2'>
@@ -40,18 +40,18 @@ const Orderlist = (props) => {
                   Delete
                 </button>
               </div>
-                <Accordion.Toggle as={Button} variant="btn btn-primary ml-3 mt-3" eventKey={data.id}>
+                <Accordion.Toggle as={Button} variant="btn btn-primary ml-3 mt-3" eventKey={datas.id}>
                     Detail
                 </Accordion.Toggle>
             </div>
-            <Accordion.Collapse eventKey={data.id}>
+            <Accordion.Collapse eventKey={datas.id}>
               <div>
                 <hr color="black" />
                 <div className="titleorderlist">Order List :</div>
                 <div className="row collapse show">
-                  {data.product.map((product) => {
+                  {datas.product.map((product) => {
                     return (
-                      <div className="boxProduct col-3 bg-dark" id={data.id}>
+                      <div className="boxProduct col-3 bg-dark" id={datas.id}>
                     
                         <div>Name : {product.productName}</div>
                         <div>

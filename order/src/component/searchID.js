@@ -51,7 +51,7 @@ const Orderlist = (props) => {
           </div>
         </div>
         <div>
-          <div className="boxOrder">
+          <div className="boxOrder bg-secondary">
             <Accordion defaultActiveKey="0">
               <div className="row headorder">
                 <div className="col-10">

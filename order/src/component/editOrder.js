@@ -70,7 +70,7 @@ const Orderlist = (props) => {
             ></input>
           </div>
           <div class="col-3 ml-4">
-            <label> ProductId if you want!!pai ha r lai kin pap </label>
+            <label> ProductId if you want!!</label>
             <input
               type="text"
               class="form-control"
@@ -82,7 +82,7 @@ const Orderlist = (props) => {
           </div>
         </div>
         <hr color="white" />
-        <div className="hidden">{p}</div>
+        <div className="hiddens">{p}</div>
         <div className="row">
         {productList.map((products,index) => (
           <div className="boxProduct col-3 bg-secondary ml-4">
