@@ -7,7 +7,7 @@ import Addorder from "./component/addOrder";
 import editorder from "./component/editOrder";
 import { Route } from "react-router-dom";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function App() {
   const [search, setsearch] = useState();

@@ -15,6 +15,13 @@ const Orderlist = (props) => {
         console.log(response.data);
     })
     }, []);
+
+    const deleteorder = (id) => {
+        axios.delete('http://localhost:8080/deleteOrder/'+id).then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    }
     if (isloaded){
   return (
     <div>
@@ -27,19 +34,27 @@ const Orderlist = (props) => {
 
             <div className="row headorder">
               <div className="col-10">
+        
                 <div className="boxtitle">Order ID : {datas.id}</div>
                 <div className="boxuser">
                   User ID : {datas.user_id} Time : {datas.time}
                 </div>
               </div>
+             
               <div className='col-2'>
-                <button type="button" className="btn btn-warning mr-2 text-light">
+                  <div className="row">
+                <button type="submit" className="btn btn-warning mr-2 text-light">
                   Edit
-                </button>
-                <button type="button" className="btn btn-danger">
+                </button> 
+                <form >
+                <button type="submit" className="btn btn-danger" onClick={() => {deleteorder(datas.id)}}>
                   Delete
                 </button>
+                
+                 </form>
+                 </div>
               </div>
+             
                 <Accordion.Toggle as={Button} variant="btn btn-primary ml-3 mt-3" eventKey={datas.id}>
                     Detail
                 </Accordion.Toggle>

@@ -1,13 +1,10 @@
 import "../main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { render } from "@testing-library/react";
-import { Accordion, Button } from "react-bootstrap";
-import ReactDOM from "react-dom";
+import React, { useState } from "react";
+
 
 const Orderlist = (props) => {
-  const [product, setproduct] = useState([" "]);
   const [productList, setproductList] = useState([]);
   const [amount,setamount] = useState(0)
   const [id,setid] = useState(0)
@@ -27,13 +24,6 @@ const Orderlist = (props) => {
     product: []
 });
   const [p, setp] = useState(1);
-  const render = (props) => {
-    axios
-      .post("http://localhost:8080/createOrder/", orderbig)
-      .then(function (response) {
-        console.log(response);
-      });
-  };
   const  addtodatabase = () =>{
       const set = {
         id: id,
@@ -147,7 +137,7 @@ const Orderlist = (props) => {
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="User Price"
+                  placeholder="Shipping"
                   onChange={(event) => {
                     setshipping(event.target.value);
                   }}

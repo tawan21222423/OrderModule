@@ -1,9 +1,8 @@
 import "../main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { render } from "@testing-library/react";
-import { Accordion, Button } from "react-bootstrap";
+import React, { useState } from "react";
+
 
 const Orderlist = (props) => {
   const [product, setproduct] = useState([" "]);
