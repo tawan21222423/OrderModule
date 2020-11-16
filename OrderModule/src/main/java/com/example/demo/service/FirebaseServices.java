@@ -29,7 +29,7 @@ public class FirebaseServices {
         return future.get().getUpdateTime().toString();
     }
 
-	public Order getOrderDetails(int id) throws InterruptedException, ExecutionException {
+	public Order getOrderDetail(int id) throws InterruptedException, ExecutionException {
 		Firestore db = FirestoreClient.getFirestore();
 		DocumentReference docRef = db.collection("orders").document(id+"");
 	
@@ -54,6 +54,26 @@ public class FirebaseServices {
 		List<Order> orList = new ArrayList<Order>();
 		ApiFuture<QuerySnapshot> future =
 			    db.collection("orders").whereEqualTo("user_id", n).get();
+			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+			for (DocumentSnapshot document : documents) {
+			  System.out.println(document.getId() + " => " + document.toObject(Order.class));
+			  Order or = document.toObject(Order.class);
+				orList.add(or);
+			}
+			if (orList.isEmpty()) {
+				System.out.println("No such document!");
+				return null;
+			}else{	
+				return orList;
+			}
+	}
+	
+	public List<Order> getStatusOrderDetail(String status) throws InterruptedException, ExecutionException {
+		String s = status;
+		Firestore db = FirestoreClient.getFirestore();
+		List<Order> orList = new ArrayList<Order>();
+		ApiFuture<QuerySnapshot> future =
+			    db.collection("orders").whereEqualTo("status", s).get();
 			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 			for (DocumentSnapshot document : documents) {
 			  System.out.println(document.getId() + " => " + document.toObject(Order.class));
