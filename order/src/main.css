@@ -32,7 +32,6 @@ body{
 .boxOrder{
     font-weight: bold;
     padding: 20px;
-    background-color:rgb(48,209,88);
     border-radius: 10px;
     margin-bottom: 20px;
 }
@@ -44,7 +43,6 @@ body{
     margin-bottom: 10px;
 }
 .boxProduct{
-    background-color: white;
     padding: 10px;
     border-radius: 10px;
     margin: 10px;
@@ -52,4 +50,7 @@ body{
 }
 .boxProduct:hover{
     transform: scale(1.02,1.02);
+}
+.hiddens{
+    display: none;
 }

@@ -1,109 +1,80 @@
+import React,{useEffect, useState} from "react";
+import "../main.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Accordion , Button } from "react-bootstrap";
+import editOrder from "./editOrder"
+import axios from "axios";
 
-import '../main.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+const Orderlist = (props) => {
+    const [data,setdata] = useState()
+    const [isloaded,setisloaded] = useState(false)
+    useEffect(() => {
+        axios.get('http://localhost:8080/AllOrder').then((res) => {
+            setdata(res.data);
+            setisloaded(true);
+            console.log(data);
+        })
+    });
+    if (isloaded){
+  return (
+    <div>
+      <div className="content">
+        <p className="TitleList">List Order</p>
+      {data.map((data) => {
+        return (
+          <div className="boxOrder bg-secondary">
+              <Accordion defaultActiveKey="0">
 
-const data = [{
-    "id": 40,
-    "user_id": 20,
-    "product": [
-        {
-            "amount": 30,
-            "shipping": "Express",
-            "productName": "Toyota",
-            "price": 50000.0
-        },
-        {
-            "amount": 2,
-            "shipping": "Express",
-            "productName": "Lambo",
-            "price": 1200000.0
-        },
-        {
-            "amount": 7,
-            "shipping": "Express",
-            "productName": "Ferrari",
-            "price": 2000000.0
-        },
-        {
-            "amount": 20,
-            "shipping": "Express",
-            "productName": "Honda",
-            "price": 2000000.0
-        }
-    ],
-    "status": "success",
-    "time": "2020/11/16 01:34:24"
-  },
-  {
-    "id": 40,
-    "user_id": 20,
-    "product": [
-        {
-            "amount": 30,
-            "shipping": "Express",
-            "productName": "Toyota",
-            "price": 50000.0
-        },
-        {
-            "amount": 2,
-            "shipping": "Express",
-            "productName": "Lambo",
-            "price": 1200000.0
-        },
-        {
-            "amount": 7,
-            "shipping": "Express",
-            "productName": "Ferrari",
-            "price": 2000000.0
-        },
-        {
-            "amount": 20,
-            "shipping": "Express",
-            "productName": "Honda",
-            "price": 2000000.0
-        }
-    ],
-    "status": "success",
-    "time": "2020/11/16 01:34:24"
-  }]
-  
-
-const orderlist = () => {
-
-    return(
-        <div>
-            {data.map((data) => {
-                return(
-                    <div className="boxOrder">
-                        <div className="row">
-                            <div className="col-10">
-                                <div className="boxtitle">Order ID : {data.id}</div>
-                                <div className="boxuser">User ID : {data.user_id} Time : {data.time}</div>
-                            </div>
-                            <div>
-                            <button type="button" className="btn btn-warning mr-2">Edit</button>
-                            <button type="button" className="btn btn-danger">Delete</button>
-                            </div>
+            <div className="row headorder">
+              <div className="col-10">
+                <div className="boxtitle">Order ID : {data.id}</div>
+                <div className="boxuser">
+                  User ID : {data.user_id} Time : {data.time}
+                </div>
+              </div>
+              <div className='col-2'>
+                <button type="button" className="btn btn-warning mr-2 text-light">
+                  Edit
+                </button>
+                <button type="button" className="btn btn-danger">
+                  Delete
+                </button>
+              </div>
+                <Accordion.Toggle as={Button} variant="btn btn-primary ml-3 mt-3" eventKey={data.id}>
+                    Detail
+                </Accordion.Toggle>
+            </div>
+            <Accordion.Collapse eventKey={data.id}>
+              <div>
+                <hr color="black" />
+                <div className="titleorderlist">Order List :</div>
+                <div className="row collapse show">
+                  {data.product.map((product) => {
+                    return (
+                      <div className="boxProduct col-3 bg-dark" id={data.id}>
+                    
+                        <div>Name : {product.productName}</div>
+                        <div>
+                          Amount : {product.amount} Price : {product.price}
                         </div>
-                        <hr color='black'/>
-                        <div className="titleorderlist">Order List : </div>
-                        <div className="row"> {data.product.map((product) => {
-                            return(
-                            
-                                <div className="boxProduct col-3">
-                                    <div>Name : {product.productName}</div>
-                                    <div>Amount : {product.amount} Price : {product.price}</div>
-                                    <div>shipping : {product.shipping}</div>
-                                </div>
-
-                            )
-                                
-                            })}
-                        </div>
-                    </div>
-                )
-            })}
-        </div>
-    )
-} 
-export default orderlist;
+                        <div>shipping : {product.shipping}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              </Accordion.Collapse>
+              </Accordion>
+          </div>
+        );
+      })}
+      </div>
+    </div>
+  );
+    }else{
+        return(
+            <div className="text-center">Loading....</div>
+        )
+    }
+};
+export default Orderlist;

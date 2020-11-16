@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,32 +29,33 @@ public class OrderController {
 	private FirebaseServices firebaseServices;
 	
 	
-	
+	@CrossOrigin
 	@PostMapping("/createOrder")
 	public String createNewUser(@RequestBody Order order) throws InterruptedException, ExecutionException {
 		return firebaseServices.saveOrderDetails(order);
 	}
-	
+	@CrossOrigin
 	@GetMapping("/getOrderDetails/{id}")
 	public Order getOrderDetails(@PathVariable("id") int id) throws InterruptedException, ExecutionException {
 		return firebaseServices.getOrderDetails(id);
 	}
-	
+
 	@GetMapping("/getUserOrder/{user_id}")
 	public List<Order> getUserOrderDetails(@PathVariable("user_id") int user_id) throws InterruptedException, ExecutionException {
 		return firebaseServices.getUserOrderDetail(user_id);
 	}
-	
+
+	@CrossOrigin
 	@PutMapping("/updateOrder")
 	public String updateOrfer(@RequestBody Order order) {
 		return "Updated order "+order.getId();
 	}
-	
+	@CrossOrigin
 	@DeleteMapping("/deleteOrder/{id}")
 	public String deleteOrder(@PathVariable("id") int id) throws InterruptedException, ExecutionException {
 		return firebaseServices.deleteOrder(id);
 	}
-	
+	@CrossOrigin
 	@GetMapping("/AllOrder")
 	public List<Order> getAllOrder() throws InterruptedException, ExecutionException {
 		List<Order> orList = new ArrayList<Order>();
