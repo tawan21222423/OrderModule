@@ -39,12 +39,12 @@ public class OrderController {
 	public Order getOrderDetails(@PathVariable("id") int id) throws InterruptedException, ExecutionException {
 		return firebaseServices.getOrderDetail(id);
 	}
-
+	@CrossOrigin
 	@GetMapping("/getUserOrder/{user_id}")
 	public List<Order> getUserOrderDetail(@PathVariable("user_id") int user_id) throws InterruptedException, ExecutionException {
 		return firebaseServices.getUserOrderDetail(user_id);
 	}
-	
+	@CrossOrigin
 	@GetMapping("/findByStatus/{status}")
 	public List<Order> getStatusOrderDetail(@PathVariable("status") String status) throws InterruptedException, ExecutionException {
 		return firebaseServices.getStatusOrderDetail(status);

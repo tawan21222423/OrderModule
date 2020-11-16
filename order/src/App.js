@@ -25,7 +25,7 @@ function App() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <a className="navbar-brand" href="/">
-          Navbar
+          Order
         </a>
         <button
           className="navbar-toggler"

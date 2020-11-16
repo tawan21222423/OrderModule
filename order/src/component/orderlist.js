@@ -6,15 +6,15 @@ import editOrder from "./editOrder"
 import axios from "axios";
 
 const Orderlist = (props) => {
-    const [data,setdata] = useState()
+    const [data,setdata] = useState([])
     const [isloaded,setisloaded] = useState(false)
-    useEffect(() => {
-        axios.get('http://localhost:8080/AllOrder').then((res) => {
-            setdata(res.data);
-            setisloaded(true);
-            console.log(data);
-        })
-    });
+    useEffect(( )=> {
+    axios.get('http://localhost:8080/AllOrder').then((response) => {
+        setdata(response.data)
+        setisloaded(true);
+        console.log(data);
+    })
+    }, []);
     if (isloaded){
   return (
     <div>

@@ -89,7 +89,7 @@ const Orderlist = (props) => {
           </div>
         </div>
         <hr color="white" />
-        <div className="hidden">{p}</div>
+        <div className="hiddens">{p}</div>
         <div className="row">
         {productList.map((products,index) => (
           <div className="boxProduct col-3 bg-secondary ml-4">
