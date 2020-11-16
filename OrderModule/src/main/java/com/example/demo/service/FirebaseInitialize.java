@@ -29,7 +29,7 @@ public class FirebaseInitialize {
 
 					FirebaseOptions options = new FirebaseOptions.Builder()
 					  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-					  .setDatabaseUrl("https://ordermodule-325b1.firebaseio.com/")
+					  .setDatabaseUrl("https://ordermodule2.firebaseio.com")
 					  .build();
 
 					FirebaseApp.initializeApp(options);
