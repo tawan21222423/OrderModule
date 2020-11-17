@@ -11,6 +11,7 @@ public class Order {
 	private List<OrderList> product;
 	private String status = "Waiting";
 	private String time;
+
 	
 	public Order() {
 		super();
@@ -69,4 +70,6 @@ public class Order {
 		this.time = time;
 	}
 
+	
 }
+
