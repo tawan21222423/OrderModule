@@ -54,3 +54,7 @@ body{
 .hiddens{
     display: none;
 }
+.loading{
+    width: 200px;
+    margin-bottom: 20px;
+}

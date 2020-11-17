@@ -4,16 +4,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Accordion , Button } from "react-bootstrap";
 import editOrder from "./editOrder"
 import axios from "axios";
+import loading from '../asset/loading.gif'; 
 
 const Orderlist = (props) => {
     const [data,setdata] = useState([])
     const [isloaded,setisloaded] = useState(false)
     useEffect(( )=> {
-    axios.get('http://localhost:8080/AllOrder').then((response) => {
-        setdata(response.data)
-        setisloaded(true);
-        console.log(response.data);
-    })
+        axios.get('http://localhost:8080/AllOrder').then((response) => {
+            setdata(response.data)
+            setisloaded(true);
+            console.log(response.data);
+        })
     }, []);
 
     const deleteorder = (id) => {
@@ -88,7 +89,7 @@ const Orderlist = (props) => {
   );
     }else{
         return(
-            <div className="text-center">Loading....</div>
+            <div className="text-center"><img src={loading} className="loading"></img></div>
         )
     }
 };
