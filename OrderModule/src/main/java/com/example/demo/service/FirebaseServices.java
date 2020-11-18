@@ -94,6 +94,14 @@ public class FirebaseServices {
 		return writeResult.get().getUpdateTime().toString();
 	}
 	
+//	public String getLast() {
+//		Firestore db = FirestoreClient.getFirestore();
+//		//CollectionReference order = db.collection("orders");
+//		Query query  = db.collection("orders").orderBy("id", Query.id.DESCENDING).limitToLast(1);
+//		System.out.println();
+//		return null;
+//	}
+	
 	public Firestore getFirebase() {
 		return FirestoreClient.getFirestore();
 	}

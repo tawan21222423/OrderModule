@@ -4,6 +4,7 @@ import java.util.List;
 
 public class OrderList {
 	
+	private int shop_id;
 	private String ProductName;
 	private int Amount;
 	private double Price;
@@ -12,11 +13,12 @@ public class OrderList {
 	
 	
 //	public OrderList (String ProductName, int Amount, String Shipping) {
-	public OrderList () {
+
 //		this.ProductName = ProductName;
 //		this.Amount = Amount;
 //		this.Shipping = Shipping;
 
+	public OrderList () {
 		
 	}
 
@@ -59,5 +61,6 @@ public class OrderList {
 	public void setAddress(List<AddList> address) {
 		this.address = address;
 	}
+
 	
 }

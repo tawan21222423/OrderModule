@@ -20,7 +20,10 @@ import com.example.demo.service.FirebaseServices;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QuerySnapshot;
+import com.google.firebase.cloud.FirestoreClient;
 
 @RestController
 public class OrderController {
@@ -52,7 +55,7 @@ public class OrderController {
 
 	@CrossOrigin
 	@PutMapping("/updateOrder")
-	public String updateOrfer(@RequestBody Order order) {
+	public String updateOrder(@RequestBody Order order) {
 		return "Updated order "+order.getId();
 	}
 	@CrossOrigin
@@ -70,8 +73,17 @@ public class OrderController {
 			Order or = doc.toObject(Order.class);
 			orList.add(or);
 		}
+		System.out.println("All order");
 		return orList;
 	}
+	
+//	@CrossOrigin
+//	@GetMapping("/Last")
+//	public String getLast() {
+//		return firebaseServices.getLast();
+//		
+//	}
+
 	
 
 }

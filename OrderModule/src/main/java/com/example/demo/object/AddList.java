@@ -8,7 +8,7 @@ public class AddList {
 	private String sub_disctrict;
 	private String road;
 	private String number;
-	private String  postal_code;
+	private String postal_code;
 	
 	public int getAddress_id() {
 		return address_id;
