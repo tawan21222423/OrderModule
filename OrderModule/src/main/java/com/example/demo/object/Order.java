@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Order {
 	
-	private int id;
+	private static int id;
 	private int user_id;
 	private List<OrderList> product;
 	private String status = "Waiting";
@@ -28,8 +28,8 @@ public class Order {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public static void setId(int a) {
+		id = a;
 	}
 
 	public int getUser_id() {

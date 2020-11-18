@@ -24,6 +24,7 @@ import com.google.firebase.database.core.Path;
 public class FirebaseServices {
 	
 	public String saveOrderDetails(Order message) throws InterruptedException, ExecutionException {
+		getLast();
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> future = db.collection("orders").document(message.getId()+"").set(message);
         return future.get().getUpdateTime().toString();
@@ -94,13 +95,18 @@ public class FirebaseServices {
 		return writeResult.get().getUpdateTime().toString();
 	}
 	
-//	public String getLast() {
-//		Firestore db = FirestoreClient.getFirestore();
-//		//CollectionReference order = db.collection("orders");
-//		Query query  = db.collection("orders").orderBy("id", Query.id.DESCENDING).limitToLast(1);
-//		System.out.println();
-//		return null;
-//	}
+	public int getLast() throws InterruptedException, ExecutionException {
+		Firestore db = FirestoreClient.getFirestore();
+		//CollectionReference order = db.collection("orders");
+		com.google.cloud.firestore.Query query  = db.collection("orders").orderBy("id");
+		ApiFuture<QuerySnapshot> future = query.get();
+		QuerySnapshot document = future.get();
+		List<Order> order = null;
+		order = document.toObjects(Order.class);
+		System.out.println("Last id = " + (order.get(order.size() - 1).getId()+1));
+		Order.setId(order.get(order.size() - 1).getId()+1);
+		return order.get(order.size() - 1).getId()+1;
+	}
 	
 	public Firestore getFirebase() {
 		return FirestoreClient.getFirestore();

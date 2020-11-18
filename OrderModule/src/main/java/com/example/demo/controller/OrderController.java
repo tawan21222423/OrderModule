@@ -77,12 +77,12 @@ public class OrderController {
 		return orList;
 	}
 	
-//	@CrossOrigin
-//	@GetMapping("/Last")
-//	public String getLast() {
-//		return firebaseServices.getLast();
-//		
-//	}
+	@CrossOrigin
+	@GetMapping("/Last")
+	public int getLast() throws InterruptedException, ExecutionException {
+		return firebaseServices.getLast();
+		
+	}
 
 	
 
