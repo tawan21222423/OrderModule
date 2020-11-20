@@ -5,6 +5,7 @@ import Orderlist from "./component/orderlist";
 import SearchID from "./component/searchID";
 import Addorder from "./component/addOrder";
 import editorder from "./component/editOrder";
+import Login from "./component/loginscreen"
 import { Route } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
@@ -63,6 +64,7 @@ function App() {
           Order <a className="blue">Module</a>
         </p>
         <Route exact path="/" component={Orderlist} />
+        <Route path="/Login" component={Login} />
         <Route path="/searchID" component={SearchID} />
         <Route path="/Addorder" component={Addorder} />
         <Route path="/Editorder" component={editorder} />
