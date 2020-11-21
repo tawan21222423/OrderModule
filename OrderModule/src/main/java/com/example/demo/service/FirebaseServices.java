@@ -23,11 +23,14 @@ import com.google.firebase.database.core.Path;
 @Service
 public class FirebaseServices {
 	
-	public String saveOrderDetails(Order message) throws InterruptedException, ExecutionException {
-		getLast();
+	public String saveOrderDetails(Order message, int i) throws InterruptedException, ExecutionException {
+		//getLast();
+		i++;
         Firestore db = FirestoreClient.getFirestore();
-        ApiFuture<WriteResult> future = db.collection("orders").document(message.getId()+"").set(message);
-        return future.get().getUpdateTime().toString();
+        ApiFuture<WriteResult> future = db.collection("orders").document(i+"").set(message);
+        DocumentReference docRef = db.collection("orders").document(i+"");
+        ApiFuture<WriteResult> writeResult = docRef.update("id", i);
+        return writeResult.get().getUpdateTime().toString();
     }
 
 	public Order getOrderDetail(int id) throws InterruptedException, ExecutionException {
@@ -104,7 +107,7 @@ public class FirebaseServices {
 		List<Order> order = null;
 		order = document.toObjects(Order.class);
 		System.out.println("Last id = " + (order.get(order.size() - 1).getId()+1));
-		Order.setId(order.get(order.size() - 1).getId()+1);
+		//Order.setId(order.get(order.size() - 1).getId()+1);
 		return order.get(order.size() - 1).getId()+1;
 	}
 	

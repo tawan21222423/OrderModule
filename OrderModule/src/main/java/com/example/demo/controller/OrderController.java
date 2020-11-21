@@ -35,7 +35,7 @@ public class OrderController {
 	@CrossOrigin
 	@PostMapping("/createOrder")
 	public String createNewUser(@RequestBody Order order) throws InterruptedException, ExecutionException {
-		return firebaseServices.saveOrderDetails(order);
+		return firebaseServices.saveOrderDetails(order, getLast());
 	}
 	@CrossOrigin
 	@GetMapping("/getOrderDetails/{id}")

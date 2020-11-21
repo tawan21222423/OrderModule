@@ -14,6 +14,7 @@ const Orderlist = (props) => {
             setdata(response.data)
             setisloaded(true);
             console.log(response.data);
+            console.log(data);
         })
     }, []);
 
