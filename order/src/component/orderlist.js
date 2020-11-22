@@ -45,7 +45,7 @@ const Orderlist = (props) => {
              
               <div className='col-2'>
                   <div className="row">
-                <button type="submit" className="btn btn-warning mr-2 text-light">
+                <button type="submit" className="btn btn-warning mr-2 text-light" onClick={() => {editOrder(datas.id)}}>
                   Edit
                 </button> 
                 <form >

@@ -11,6 +11,7 @@ public class Order {
 	private List<OrderList> product;
 	private String status = "Waiting";
 	private String time;
+	private AddList address;
 
 	
 	public Order() {
@@ -70,6 +71,13 @@ public class Order {
 		this.time = time;
 	}
 
+	public AddList getAddress() {
+		return address;
+	}
+
+	public void setAddress(AddList address) {
+		this.address = address;
+	}
 	
 }
 

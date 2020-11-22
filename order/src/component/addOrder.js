@@ -32,11 +32,14 @@ const Orderlist = (props) => {
       }
       setorderbig(set);
       console.log(orderbig)
-      axios.post('http://localhost:8080/createOrder', orderbig)
+      setTimeout(() => {
+        axios.post('http://localhost:8080/createOrder', orderbig)
       .then(res => {
         console.log(res);
         console.log(res.data);
       })
+      }, 500);
+
   }
   const addinlist = () =>{
         const dic = {

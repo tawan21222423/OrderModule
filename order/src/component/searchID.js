@@ -10,25 +10,20 @@ const Orderlist = (props) => {
   const [items, setItems] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const render = (props) => {
-    axios.get("http://localhost:8080/getOrderDetails/" + search).then(function (response) {
-        // handle success
-        console.log(response);
-        setItems(response.data);
-        if(response.data){
-            setIsLoaded(true);
+  const render = async (props)  => {
+        const res = await axios.get("http://localhost:8080/getOrderDetails/" + search)
+        console.log(res.data);
+        
+        if(res.data){
+          setItems(res.data)
+          setIsLoaded(true)
+          console.log('Yes')
         }
-        console.log(items);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-        setIsLoaded(false);
-      })
-      .then(function () {
-        // always executed
-      });
-    
+        else{
+          console.log('No')
+          setIsLoaded(false)
+        }
+          
   };
   if (isLoaded) {
     return (
@@ -44,7 +39,7 @@ const Orderlist = (props) => {
               placeholder="Search order id"
               aria-label="Search"
             ></input>
-            <button className="btn btn-success ml-2" onClick={render}>
+            <button className="btn btn-success ml-2" onClick={() => render()}>
               Search
             </button>
           </div>

@@ -5,6 +5,8 @@ import React, { useState } from "react";
 
 
 const Orderlist = (props) => {
+  const [data,setdata] = useState([])
+  
   const [product, setproduct] = useState([" "]);
   const [productList, setproductList] = useState([]);
   const [amount,setamount] = useState(0)
@@ -27,47 +29,40 @@ const Orderlist = (props) => {
   const [p, setp] = useState(1);
 
 
-  const updatetodatabase = () =>{
-    // const set = {
-    //   id: id,
-    //   user_id: user_id,
-    //   product: productList
-    // }
-    // setorderbig(set);
-    // axios.put('http://localhost:8080/updateOrder', orderbig)
-    // .then(res => {
-    //   console.log(res);
-    //   console.log(res.data);
-    // })
-}
+//   const updatetodatabase = () =>{
+//     const set = {
+//       id: id,
+//       user_id: user_id,
+//       product: productList
+//     }
+//     setorderbig(set);
+//     axios.put('http://localhost:8080/updateOrder', orderbig)
+//     .then(res => {
+//       console.log(res);
+//       console.log(res.data);
+//     })
+// }
 
 
-  // const render = (props) => {
-  //   axios.get('http://localhost:8080/getOrderDetails/{id}').then((res) => {
-  //           setproductName(productName);
-  //           setamount(amount);
-  //           setprice(price);
-  //           setshipping(shipping);
+  const render = (id) => {
+    axios.get('http://localhost:8080/getOrderDetails/'+id).then((res) => {
+            setdata(res.data)
+            // setproductName(productName);
+            // setamount(amount);
+            // setprice(price);
+            // setshipping(shipping);
+            
   
-  //       })
+        })
     
-  // };
+  };
     return(
+      <div>
+      {data.map((datas) => {
       <div className="pb-5">
       <p className="TitleList">Edit Order</p>
       <form>
         <div class="row">
-          <div class="col-3 ml-4">
-            <label> Order ID </label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Order Id"
-              onChange={(event) => {
-                setid(event.target.value);
-              }}
-            ></input>
-          </div>
           <div class="col-3 ml-4">
             <label> ProductId if you want!!</label>
             <input
@@ -158,7 +153,7 @@ const Orderlist = (props) => {
               </div> */}
             </div>
             <div className="text-center">
-            <button
+            {/* <button
                   type="button"
                   className="btn btn-success col-8 mt-5 ml-4"
                   onClick={() => {
@@ -166,13 +161,16 @@ const Orderlist = (props) => {
                   }}
                 >
                   Update
-                </button></div>
+                </button> */}
+                </div>
           </div>
       </form>
     </div>
-    )
-                
-                
-
+      })}
+    </div>
+    
+    );
+                     
+    
 };
 export default Orderlist;

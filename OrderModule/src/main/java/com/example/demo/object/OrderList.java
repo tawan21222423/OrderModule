@@ -9,7 +9,7 @@ public class OrderList {
 	private int Amount;
 	private double Price;
 	private int shipping_option_id;
-	private List<AddList> address;
+	
 	
 	
 //	public OrderList (String ProductName, int Amount, String Shipping) {
@@ -53,14 +53,5 @@ public class OrderList {
 	public void setShipping_option_id(int shipping_option_id) {
 		this.shipping_option_id = shipping_option_id;
 	}
-
-	public List<AddList> getAddress() {
-		return address;
-	}
-
-	public void setAddress(List<AddList> address) {
-		this.address = address;
-	}
-
 	
 }
