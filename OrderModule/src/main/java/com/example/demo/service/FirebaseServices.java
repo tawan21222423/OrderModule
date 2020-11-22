@@ -25,7 +25,12 @@ public class FirebaseServices {
 	
 	public String saveOrderDetails(Order message, int i) throws InterruptedException, ExecutionException {
 		//getLast();
-		i++;
+		if(i != 0) {
+			i++;
+		}else{
+			i = message.getId();
+		}
+		
         Firestore db = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> future = db.collection("orders").document(i+"").set(message);
         DocumentReference docRef = db.collection("orders").document(i+"");
@@ -106,13 +111,38 @@ public class FirebaseServices {
 		QuerySnapshot document = future.get();
 		List<Order> order = null;
 		order = document.toObjects(Order.class);
-		System.out.println("Last id = " + (order.get(order.size() - 1).getId()+1));
+
 		//Order.setId(order.get(order.size() - 1).getId()+1);
-		return order.get(order.size() - 1).getId()+1;
+		if (order.size() == 0) {
+			System.out.println("Last id = " + 1);
+			return 0;
+		}else {
+			System.out.println("Last id = " + (order.get(order.size() - 1).getId()+1));
+			return order.get(order.size() - 1).getId();
+		}
+		
 	}
+	
+	public String updateCancell(int id) throws InterruptedException, ExecutionException {
+		Firestore db = FirestoreClient.getFirestore();
+        DocumentReference docRef = db.collection("orders").document(id+"");
+        ApiFuture<WriteResult> writeResult = docRef.update("status", "Cancelled");
+        System.out.println("Cancell id : " + id);
+        return "Cancell id : " + id;
+	}
+	
+	public String updateSuccess(int id) throws InterruptedException, ExecutionException {
+		Firestore db = FirestoreClient.getFirestore();
+        DocumentReference docRef = db.collection("orders").document(id+"");
+        ApiFuture<WriteResult> writeResult = docRef.update("status", "Success");
+        System.out.println("id "+ id + " Success");
+        return "id "+ id + " Success";
+	}
+
 	
 	public Firestore getFirebase() {
 		return FirestoreClient.getFirestore();
 	}
 
+	
 }

@@ -51,15 +51,10 @@ function App() {
                 find order
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="/Editorder">
-                Edit Order
-              </a>
-            </li>
           </ul>
         </div>
       </nav>
-      <div className="container bg-dark text-light">
+      <div className="container bg-dark text-light mb-5">
         <p className="text-center Title">
           Order <a className="blue">Module</a>
         </p>
@@ -67,7 +62,7 @@ function App() {
         <Route path="/Login" component={Login} />
         <Route path="/searchID" component={SearchID} />
         <Route path="/Addorder" component={Addorder} />
-        <Route path="/Editorder" component={editorder} />
+        <Route path="/Editorder/:id" component={editorder} />
       </div>
     </div>
   );

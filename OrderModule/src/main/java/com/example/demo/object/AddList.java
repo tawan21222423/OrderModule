@@ -5,7 +5,7 @@ public class AddList {
 	private int address_id;
 	private String province;
 	private String district;
-	private String sub_disctrict;
+	private String sub_district;
 	private String road;
 	private String number;
 	private String postal_code;
@@ -34,14 +34,6 @@ public class AddList {
 		this.district = district;
 	}
 
-	public String getSub_disctrict() {
-		return sub_disctrict;
-	}
-
-	public void setSub_disctrict(String sub_disctrict) {
-		this.sub_disctrict = sub_disctrict;
-	}
-
 	public String getRoad() {
 		return road;
 	}
@@ -64,6 +56,14 @@ public class AddList {
 
 	public void setPostal_code(String postal_code) {
 		this.postal_code = postal_code;
+	}
+
+	public String getSub_district() {
+		return sub_district;
+	}
+
+	public void setSub_district(String sub_district) {
+		this.sub_district = sub_district;
 	}
 	
 }

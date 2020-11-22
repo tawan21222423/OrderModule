@@ -6,6 +6,11 @@
 .blue{
     color: rgb(10,132,255);
 }
+.text-dark:hover{
+    color: #292b2c;
+    text-decoration: unset;
+
+}
 .blue:hover{
     color: rgb(10,132,255);
     text-decoration: unset;
@@ -43,8 +48,8 @@ body{
     margin-bottom: 10px;
 }
 .boxProduct{
-    padding: 10px;
-    border-radius: 10px;
+    width: 18rem;
+    border-radius: 50px;
     margin: 10px;
     transition: ease-in-out 0.15s;
 }

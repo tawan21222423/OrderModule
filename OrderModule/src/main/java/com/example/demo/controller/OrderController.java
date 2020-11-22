@@ -55,9 +55,22 @@ public class OrderController {
 
 	@CrossOrigin
 	@PutMapping("/updateOrder")
-	public String updateOrder(@RequestBody Order order) {
-		return "Updated order "+order.getId();
+	public String updateOrder(@RequestBody Order order) throws InterruptedException, ExecutionException {
+		return firebaseServices.saveOrderDetails(order, 0);
 	}
+	
+	@CrossOrigin
+	@PutMapping("/updateCancell/{id}")
+	public String updateCancell(@PathVariable("id") int id) throws InterruptedException, ExecutionException {
+		return firebaseServices.updateCancell(id);
+	}
+	
+	@CrossOrigin
+	@PutMapping("/updateSuccess/{id}")
+	public String updateSuccess(@PathVariable("id") int id) throws InterruptedException, ExecutionException {
+		return firebaseServices.updateSuccess(id);
+	}
+	
 	@CrossOrigin
 	@DeleteMapping("/deleteOrder/{id}")
 	public String deleteOrder(@PathVariable("id") int id) throws InterruptedException, ExecutionException {

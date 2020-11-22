@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Order {
 	
-	int id = 0;
+	int id;
 	private int user_id;
 	private List<OrderList> product;
 	private String status = "Waiting";
