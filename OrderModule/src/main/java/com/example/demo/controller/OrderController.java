@@ -56,7 +56,7 @@ public class OrderController {
 	@CrossOrigin
 	@PutMapping("/updateOrder")
 	public String updateOrder(@RequestBody Order order) throws InterruptedException, ExecutionException {
-		return firebaseServices.saveOrderDetails(order, 0);
+		return firebaseServices.saveOrderDetails(order, -1);
 	}
 	
 	@CrossOrigin

@@ -25,7 +25,8 @@ public class FirebaseServices {
 	
 	public String saveOrderDetails(Order message, int i) throws InterruptedException, ExecutionException {
 		//getLast();
-		if(i != 0) {
+		if(i != -1) {
+			
 			i++;
 		}else{
 			i = message.getId();
