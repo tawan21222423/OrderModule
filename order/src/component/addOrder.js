@@ -160,13 +160,14 @@ const Orderlist = (props) => {
         setproductList(list)
         setp(p+1)
         console.log(productList)
+        setloaded(false)
   }
   //console.log(product);
   const productVertify = () => {
     let obj = product.find(o => o.id == productID);
     setproductOb(obj)
     console.log(obj)
-    if(true){
+    if(obj !== undefined){
       setloaded(true)
       console.log('hello')
     }else{
@@ -252,7 +253,7 @@ const Orderlist = (props) => {
             <div>
             <div className="mt-2 ml-4">Product</div>
             <div className="row productadd mt-2">
-              <div className="col-2 ml-4">
+              <div className="col-3 ml-4">
                 <label> Id Product</label>
                 <input
                   type="text"
@@ -263,6 +264,7 @@ const Orderlist = (props) => {
                   }}
                 ></input>
                 <button type="button" className="btn btn-primary mt-2" onClick={() => {productVertify()}}>Vertify</button>
+                { !loaded ? (<div className="alert alert-danger fade show mt-3">product not found</div>) : (<div></div>)}
               </div>
               {loaded ? (
                 <div className="form-row">
@@ -316,16 +318,30 @@ const Orderlist = (props) => {
                 </button>
               </div>
             </div>
-            <div className="text-center">
+            {loaded && loadedUser ? (
+              <div className="text-center">
+              <button
+                    type="button"
+                    className="btn btn-success col-8 mt-5 ml-4"
+                    onClick={() => {
+                     addtodatabase();
+                    }}
+                  >
+                    Submit
+                  </button></div>
+            ): (
+              <div className="text-center">
             <button
                   type="button"
                   className="btn btn-success col-8 mt-5 ml-4"
                   onClick={() => {
                    addtodatabase();
                   }}
-                >
+                disabled>
                   Submit
                 </button></div>
+            )}
+            
           </div>
       </form>
     </div>

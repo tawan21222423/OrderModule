@@ -26,6 +26,18 @@ const Orderlist = (props) => {
         }
           
   };
+  const Cancelorder = (id) => {
+    axios.put('http://localhost:8080/updateCancell/'+id).then(res => {
+    console.log(res);
+    console.log(res.data);
+  })
+}
+const Successorder = (id) => {
+  axios.put('http://localhost:8080/updateSuccess/'+id).then(res => {
+  console.log(res);
+  console.log(res.data);
+})
+}
   const deleteorder = (id) => {
     axios.delete('http://localhost:8080/deleteOrder/'+id).then(res => {
     console.log(res);
@@ -34,7 +46,7 @@ const Orderlist = (props) => {
 }
   if (isLoaded) {
     return (
-      <div className="pb-5">
+      <div className="pb-5 content">
         <div className="p-5">
           <div className="form-inline col-12  justify-content-center">
             <input
@@ -76,6 +88,12 @@ const Orderlist = (props) => {
                 >
                   Detail
                 </Accordion.Toggle>
+                <button type="submit" className="btn btn-success text-light ml-3 mt-3" onClick={() => {Successorder(items.id)}}>
+                  Success
+                </button> 
+                <button type="submit" className="btn btn-light text-dark ml-3 mt-3" onClick={() => {Cancelorder(items.id)}}>
+                  Cancel
+                </button> 
               </div>
               <Accordion.Collapse eventKey={items.id}>
                 <div>

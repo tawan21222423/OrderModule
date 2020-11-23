@@ -1,15 +1,21 @@
 import React,{useEffect, useState} from "react";
 import "../main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Accordion , Button } from "react-bootstrap";
-import editOrder from "./editOrder"
+import { Accordion , Button,Modal } from "react-bootstrap";
+import { Redirect,useHistory,useParams  } from 'react-router-dom'
 import axios from "axios";
 import loading from '../asset/loading.gif'; 
+import cancel from '../asset/cancel.gif'
 
 import { Route,Link } from "react-router-dom";
 const Orderlist = (props) => {
+    const [modaltext, setmodaltext] = useState('')
+    const [modaltitleText, setmodaltitleText] = useState('')
+    const [modalShowcancel, setmodalShowcancel] = React.useState(false);
     const [data,setdata] = useState([])
+    const [p,setp] = useState(0)
     const [isloaded,setisloaded] = useState(false)
+    const history = useHistory();
     useEffect(( )=> {
         axios.get('http://localhost:8080/AllOrder').then((response) => {
             setdata(response.data)
@@ -18,7 +24,33 @@ const Orderlist = (props) => {
             console.log(data);
         })
     }, []);
-
+    const handleClose = () => {
+      setmodalShowcancel(false)
+    }
+    const Cancelorder = (id) => {
+      axios.put('http://localhost:8080/updateCancell/'+id).then(res => {
+      console.log(res);
+      console.log(res.data);
+      setmodaltext('Order '+id+' Was Canceled' )
+      setmodaltitleText('Cancel')
+      setmodalShowcancel(true)
+      setTimeout(() => {
+        window.location.reload(false);
+      }, 800);
+    })
+  }
+  const Successorder = (id) => {
+    axios.put('http://localhost:8080/updateSuccess/'+id).then(res => {
+    setmodaltext('Order '+id+' Success' )
+    setmodaltitleText('Success')
+    console.log(res);
+    console.log(res.data);
+    setmodalShowcancel(true)
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 800);
+  })
+}
     const deleteorder = (id) => {
         axios.delete('http://localhost:8080/deleteOrder/'+id).then(res => {
         console.log(res);
@@ -36,15 +68,21 @@ const Orderlist = (props) => {
               <Accordion defaultActiveKey="0">
 
             <div className="row headorder">
-              <div className="col-9">
+              <div className="col-10">
         
                 <div className="boxtitle"><a className="text-dark black">Order ID </a>: {datas.id}</div>
                 <div className="boxuser">
                   User ID : {datas.user_id} Time : {datas.time}
                 </div>
+                <div className="boxuser">
+                  {datas.status}
+                </div>
+                <div className="hiddens">
+                  {p}
+                </div>
               </div>
              
-              <div className='col-3'>
+              <div className='col-2'>
                   <div className="row">
                   <Link to={"/Editorder/"+datas.id} className="btn btn-warning mr-2 text-light">
                   Edit
@@ -53,15 +91,20 @@ const Orderlist = (props) => {
                 <button type="submit" className="btn btn-danger mr-2" onClick={() => {deleteorder(datas.id)}}>
                   Delete
                 </button>
-                <button type="submit" className="btn btn-primary text-light" onClick={() => {editOrder(datas.id)}}>
-                  Cancel
-                </button> 
                  </form>
                  </div>
               </div>
+            
                 <Accordion.Toggle as={Button} variant="btn btn-dark ml-3 mt-3" eventKey={datas.id}>
                     Detail
                 </Accordion.Toggle>
+                <button type="submit" className="btn btn-success text-light ml-3 mt-3" onClick={() => {Successorder(datas.id)}}>
+                  Success
+                </button> 
+                <button type="submit" className="btn btn-light text-dark ml-3 mt-3" onClick={() => {Cancelorder(datas.id)}}>
+                  Cancel
+                </button> 
+                
             </div>
             <Accordion.Collapse eventKey={datas.id}>
               <div>
@@ -96,7 +139,25 @@ const Orderlist = (props) => {
         );
       })}
       </div>
+      <Modal
+      show={modalShowcancel}
+      size="sm"
+      aria-labelledby="modal-title-vcenter"
+      centered
+      onHide={handleClose}
+    >
+      <Modal.Header closeButton className="bg-secondary text-light">
+        <Modal.Title id="modal-title-vcenter">
+        <h4>{modaltitleText} Complete</h4>
+        </Modal.Title>
+      </Modal.Header>
+    
+      <Modal.Footer className="justify-content-center">
+        {modaltext}
+      </Modal.Footer>
+    </Modal>
     </div>
+    
   );
     }else{
         return(
