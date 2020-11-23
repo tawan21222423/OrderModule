@@ -25,7 +25,7 @@ function App() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="/">
+        <a className="navbar-brand font-weight-bold" href="/">
           Order
         </a>
         <button
@@ -42,12 +42,12 @@ function App() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="/Addorder">
+              <a className="nav-link font-weight-bold" href="/Addorder">
                 Add order
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="/searchID">
+              <a className="nav-link active font-weight-bold" href="/searchID">
                 find order
               </a>
             </li>
