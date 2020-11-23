@@ -131,7 +131,7 @@ const Orderlist = (props) => {
   }
   const data = useParams()
   useEffect(()=>{
-    axios.get('http://localhost:8080/getOrderDetails/'+data.id).then(res => {
+    axios.get('https://ordermodule.herokuapp.com/getOrderDetails/'+data.id).then(res => {
         console.log(res);
         console.log(res.data);
         setorderbig(res.data)
@@ -143,7 +143,7 @@ const Orderlist = (props) => {
   },[])
   const [p, setp] = useState(1);
   const  addtodatabase = () =>{
-      axios.put('http://localhost:8080/updateOrder', {
+      axios.put('https://ordermodule.herokuapp.com/updateOrder', {
           id : data.id,
           user_id: user_id,
           product: productList,

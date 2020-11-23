@@ -17,7 +17,7 @@ const Orderlist = (props) => {
     const [isloaded,setisloaded] = useState(false)
     const history = useHistory();
     useEffect(( )=> {
-        axios.get('http://localhost:8080/AllOrder').then((response) => {
+        axios.get('https://ordermodule.herokuapp.com/AllOrder').then((response) => {
             setdata(response.data)
             setisloaded(true);
             console.log(response.data);
@@ -28,7 +28,7 @@ const Orderlist = (props) => {
       setmodalShowcancel(false)
     }
     const Cancelorder = (id) => {
-      axios.put('http://localhost:8080/updateCancell/'+id).then(res => {
+      axios.put('https://ordermodule.herokuapp.com/updateCancell/'+id).then(res => {
       console.log(res);
       console.log(res.data);
       setmodaltext('Order '+id+' Was Canceled' )
@@ -40,7 +40,7 @@ const Orderlist = (props) => {
     })
   }
   const Successorder = (id) => {
-    axios.put('http://localhost:8080/updateSuccess/'+id).then(res => {
+    axios.put('https://ordermodule.herokuapp.com/updateSuccess/'+id).then(res => {
     setmodaltext('Order '+id+' Success' )
     setmodaltitleText('Success')
     console.log(res);
@@ -52,7 +52,7 @@ const Orderlist = (props) => {
   })
 }
     const deleteorder = (id) => {
-        axios.delete('http://localhost:8080/deleteOrder/'+id).then(res => {
+        axios.delete('https://ordermodule.herokuapp.com/deleteOrder/'+id).then(res => {
         console.log(res);
         console.log(res.data);
       })

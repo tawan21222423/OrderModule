@@ -131,7 +131,7 @@ const Orderlist = (props) => {
   }
   const [p, setp] = useState(1);
   const  addtodatabase = () =>{
-      axios.post('http://localhost:8080/createOrder', {
+      axios.post('https://ordermodule.herokuapp.com/createOrder', {
           user_id: user_id,
           product: productList,
           address: Address,

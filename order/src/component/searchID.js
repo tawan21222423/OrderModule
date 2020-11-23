@@ -12,7 +12,7 @@ const Orderlist = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const render = async (props)  => {
-        const res = await axios.get("http://localhost:8080/getOrderDetails/" + search)
+        const res = await axios.get("https://ordermodule.herokuapp.com/getOrderDetails/" + search)
         console.log(res.data);
         
         if(res.data){
@@ -27,19 +27,19 @@ const Orderlist = (props) => {
           
   };
   const Cancelorder = (id) => {
-    axios.put('http://localhost:8080/updateCancell/'+id).then(res => {
+    axios.put('https://ordermodule.herokuapp.com/updateCancell/'+id).then(res => {
     console.log(res);
     console.log(res.data);
   })
 }
 const Successorder = (id) => {
-  axios.put('http://localhost:8080/updateSuccess/'+id).then(res => {
+  axios.put('https://ordermodule.herokuapp.com/updateSuccess/'+id).then(res => {
   console.log(res);
   console.log(res.data);
 })
 }
   const deleteorder = (id) => {
-    axios.delete('http://localhost:8080/deleteOrder/'+id).then(res => {
+    axios.delete('https://ordermodule.herokuapp.com/deleteOrder/'+id).then(res => {
     console.log(res);
     console.log(res.data);
   })
