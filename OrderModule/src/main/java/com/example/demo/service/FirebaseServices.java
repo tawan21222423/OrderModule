@@ -26,10 +26,10 @@ public class FirebaseServices {
 	public String saveOrderDetails(Order message, int i) throws InterruptedException, ExecutionException {
 		//getLast();
 		if(i != -1) {
-			
 			i++;
 		}else{
 			i = message.getId();
+			System.out.println(i);
 		}
 		
         Firestore db = FirestoreClient.getFirestore();

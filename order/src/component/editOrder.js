@@ -115,7 +115,7 @@ const Orderlist = (props) => {
   const [loaded, setloaded] = useState(false);
   const [loadedUser, setloadedUser] = useState(false);
   const [productList, setproductList] = useState([]);
-  const [amount,setamount] = useState(1)
+  const [amount,setamount] = useState()
   const [user_id,setuser_id] = useState(0)
   const [shipping,setshipping] = useState('')
   const [productID,setproductID] = useState()
@@ -183,6 +183,7 @@ const Orderlist = (props) => {
       setloaded(true)
       setoptionOb(obj.options[0])
       setshipping(shippings[0].id)
+      setamount(1)
       console.log('hello')
     }else{
       setloaded(false)
@@ -319,7 +320,6 @@ if(loadedpage){
                 <label> Amount</label>
                 <input
                   type="number"
-                  value={1}
                   className="form-control"
                   placeholder="Amount"
                   
