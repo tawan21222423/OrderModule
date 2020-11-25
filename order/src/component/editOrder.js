@@ -115,13 +115,11 @@ const Orderlist = (props) => {
   const [loaded, setloaded] = useState(false);
   const [loadedUser, setloadedUser] = useState(false);
   const [productList, setproductList] = useState([]);
-<<<<<<< HEAD
-  const [amount,setamount] = useState()
-=======
+
   const [amount,setamount] = useState(0)
->>>>>>> parent of b660466... add
   const [user_id,setuser_id] = useState(0)
   const [shipping,setshipping] = useState('Kerry')
+  const [shippingOb, setshippingOb] = useState();
   const [productID,setproductID] = useState()
   const [productSName,setproductSName] = useState('')
   const [price,setprice] = useState(0)
@@ -147,20 +145,28 @@ const Orderlist = (props) => {
   },[])
   const [p, setp] = useState(1);
   const  addtodatabase = () =>{
-      axios.put('http://localhost:8080/updateOrder', {
-          id : data.id,
-          user_id: user_id,
-          product: productList,
-          address: Address,
-        })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
+    axios.post('http://localhost:8080/createOrder', {
+        user_id: user_id,
+        product: productList,
+        address: Address,
       })
-      setTimeout(() => {
-        history.push("/");
-      }, 1000);
-  }
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+    axios.post('https://c32eb82ab3fb.ngrok.io/shipping/order', {
+        user_id: user_id,
+        product: productList,
+        address: Address,
+      })
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+    setTimeout(() => {
+      history.push("/");
+    }, 1000);
+}
   const addinlist = () =>{
         const dic = {
             amount: amount,
@@ -179,24 +185,24 @@ const Orderlist = (props) => {
         console.log(productList)
   }
   //console.log(product);
-  const productVertify = () => {
-    let obj = product.find(o => o.id == productID);
-    setproductOb(obj)
-    console.log(obj)
-    if(true){
-      setloaded(true)
-<<<<<<< HEAD
-      setoptionOb(obj.options[0])
-      setshipping(shippings[0].id)
+  const productVertify = async() => {
+    const res = await axios.get("https://e1062eb5adf1.ngrok.io/product/get/" + productID)
+    console.log(res.data);
+    setproductOb(res.data)
+    if(res.data){
+      setoptionOb(res.data.options[0])
       setamount(1)
-=======
->>>>>>> parent of b660466... add
-      console.log('hello')
+      if(amount === 1){
+      const ress = await axios.get("https://c32eb82ab3fb.ngrok.io/shipping_option/shop/" + productOb.shop_id)
+      console.log(ress.data); 
+      setshipping(ress.data[0].id)
+      setshippingOb(ress.data)
     }else{
       setloaded(false)
     }
 
   }
+}
   
   const addoption = (event) => {
     let obj = productOb.options.find(o => o.id == event.target.value);
@@ -327,10 +333,6 @@ if(loadedpage){
                 <label> Amount</label>
                 <input
                   type="number"
-<<<<<<< HEAD
-                  
-=======
->>>>>>> parent of b660466... add
                   className="form-control"
                   placeholder="Amount"
                   

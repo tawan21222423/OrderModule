@@ -115,11 +115,7 @@ const Orderlist = (props) => {
   const [loaded, setloaded] = useState(false);
   const [loadedUser, setloadedUser] = useState(false);
   const [productList, setproductList] = useState([]);
-<<<<<<< HEAD
-  const [amount,setamount] = useState()
-=======
   const [amount,setamount] = useState(0)
->>>>>>> parent of b660466... add
   const [user_id,setuser_id] = useState(0)
   const [shipping,setshipping] = useState('Kerry')
   const [productID,setproductID] = useState()
@@ -137,7 +133,6 @@ const Orderlist = (props) => {
   const [p, setp] = useState(1);
   const  addtodatabase = () =>{
       axios.post('http://localhost:8080/createOrder', {
-<<<<<<< HEAD
           user_id: user_id,
           product: productList,
           address: Address,
@@ -147,8 +142,6 @@ const Orderlist = (props) => {
         console.log(res.data);
       })
       axios.post('https://c32eb82ab3fb.ngrok.io/shipping/order', {
-=======
->>>>>>> parent of b660466... add
           user_id: user_id,
           product: productList,
           address: Address,
@@ -179,7 +172,7 @@ const Orderlist = (props) => {
         console.log(productList)
   }
   //console.log(product);
-<<<<<<< HEAD
+
   const productVertify = async() => {
     const res = await axios.get("https://e1062eb5adf1.ngrok.io/product/get/" + productID)
     console.log(res.data);
@@ -192,21 +185,12 @@ const Orderlist = (props) => {
       console.log(ress.data); 
       setshipping(ress.data[0].id)
       setshippingOb(ress.data)
-=======
-  const productVertify = () => {
-    let obj = product.find(o => o.id == productID);
-    setproductOb(obj)
-    console.log(obj)
-    if(true){
->>>>>>> parent of b660466... add
-      setloaded(true)
-      console.log('hello')
-      }
     }else{
       setloaded(false)
     }
 
   }
+}
   
   const addoption = (event) => {
     let obj = productOb.options.find(o => o.id == event.target.value);
