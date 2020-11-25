@@ -115,9 +115,13 @@ const Orderlist = (props) => {
   const [loaded, setloaded] = useState(false);
   const [loadedUser, setloadedUser] = useState(false);
   const [productList, setproductList] = useState([]);
+<<<<<<< HEAD
   const [amount,setamount] = useState()
+=======
+  const [amount,setamount] = useState(0)
+>>>>>>> parent of b660466... add
   const [user_id,setuser_id] = useState(0)
-  const [shipping,setshipping] = useState('')
+  const [shipping,setshipping] = useState('Kerry')
   const [productID,setproductID] = useState()
   const [productSName,setproductSName] = useState('')
   const [price,setprice] = useState(0)
@@ -131,7 +135,7 @@ const Orderlist = (props) => {
   }
   const data = useParams()
   useEffect(()=>{
-    axios.get('https://ordermodule.herokuapp.com/getOrderDetails/'+data.id).then(res => {
+    axios.get('http://localhost:8080/getOrderDetails/'+data.id).then(res => {
         console.log(res);
         console.log(res.data);
         setorderbig(res.data)
@@ -143,7 +147,7 @@ const Orderlist = (props) => {
   },[])
   const [p, setp] = useState(1);
   const  addtodatabase = () =>{
-      axios.put('https://ordermodule.herokuapp.com/updateOrder', {
+      axios.put('http://localhost:8080/updateOrder', {
           id : data.id,
           user_id: user_id,
           product: productList,
@@ -179,11 +183,14 @@ const Orderlist = (props) => {
     let obj = product.find(o => o.id == productID);
     setproductOb(obj)
     console.log(obj)
-    if(obj !== undefined){
+    if(true){
       setloaded(true)
+<<<<<<< HEAD
       setoptionOb(obj.options[0])
       setshipping(shippings[0].id)
       setamount(1)
+=======
+>>>>>>> parent of b660466... add
       console.log('hello')
     }else{
       setloaded(false)
@@ -258,7 +265,7 @@ if(loadedpage){
             Amount : {products.amount} Price : {products.price}
           </div>
           <div>Shipping : {products.shipping_option_id}</div>
-          <div className="">
+          <div className="row">
           <button type="button" className="btn btn-danger mt-2 col mb-0" 
           onClick={() => {
             const list = productList
@@ -320,6 +327,10 @@ if(loadedpage){
                 <label> Amount</label>
                 <input
                   type="number"
+<<<<<<< HEAD
+                  
+=======
+>>>>>>> parent of b660466... add
                   className="form-control"
                   placeholder="Amount"
                   

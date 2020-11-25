@@ -11,7 +11,7 @@ const Orderlist = (props) => {
     const [data,setdata] = useState([])
     const [isloaded,setisloaded] = useState(false)
     useEffect(( )=> {
-        axios.get('https://ordermodule.herokuapp.com/AllOrder').then((response) => {
+        axios.get('http://localhost:8080/AllOrder').then((response) => {
             setdata(response.data)
             setisloaded(true);
             console.log(response.data);
@@ -20,27 +20,9 @@ const Orderlist = (props) => {
     }, []);
 
     const deleteorder = (id) => {
-        axios.delete('https://ordermodule.herokuapp.com/deleteOrder/'+id).then(res => {
+        axios.delete('http://localhost:8080/deleteOrder/'+id).then(res => {
         console.log(res);
         console.log(res.data);
-      })
-    }
-    const cancelorder = (id) => {
-      axios.put('https://ordermodule.herokuapp.com/updateCancell/'+id).then(res => {
-        console.log(res);
-        console.log(res.data);
-        setTimeout(() => {
-          window.location.reload(false);
-        }, 500);
-      })
-    }
-    const successorder = (id) => {
-      axios.put('https://ordermodule.herokuapp.com/updateSuccess/'+id).then(res => {
-        console.log(res);
-        console.log(res.data);
-        setTimeout(() => {
-          window.location.reload(false);
-        }, 500);
       })
     }
     if (isloaded){
@@ -54,16 +36,15 @@ const Orderlist = (props) => {
               <Accordion defaultActiveKey="0">
 
             <div className="row headorder">
-              <div className="col-10">
+              <div className="col-9">
         
-        <div className="boxtitle"><a className="text-dark black">Order ID </a>: {datas.id}</div> 
-              <div>{datas.status}</div>
+                <div className="boxtitle"><a className="text-dark black">Order ID </a>: {datas.id}</div>
                 <div className="boxuser">
                   User ID : {datas.user_id} Time : {datas.time}
                 </div>
               </div>
              
-              <div className='col-2'>
+              <div className='col-3'>
                   <div className="row">
                   <Link to={"/Editorder/"+datas.id} className="btn btn-warning mr-2 text-light">
                   Edit
@@ -72,20 +53,15 @@ const Orderlist = (props) => {
                 <button type="submit" className="btn btn-danger mr-2" onClick={() => {deleteorder(datas.id)}}>
                   Delete
                 </button>
-      
-
+                <button type="submit" className="btn btn-primary text-light" onClick={() => {editOrder(datas.id)}}>
+                  Cancel
+                </button> 
                  </form>
                  </div>
               </div>
                 <Accordion.Toggle as={Button} variant="btn btn-dark ml-3 mt-3" eventKey={datas.id}>
                     Detail
                 </Accordion.Toggle>
-                <button type="submit" className="btn btn-light text-dark ml-3 mt-3" onClick={() => {cancelorder(datas.id)}}>
-                  Cancel
-                </button>
-                <button type="submit" className="btn btn-primary text-light ml-3 mt-3" onClick={() => {successorder(datas.id)}}>
-                  Success
-                </button>  
             </div>
             <Accordion.Collapse eventKey={datas.id}>
               <div>

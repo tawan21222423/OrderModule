@@ -4,9 +4,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Redirect,useHistory  } from 'react-router-dom'
 
-
-
-
 const product = [{
   id: 1,
   shop_id: 1,
@@ -113,20 +110,25 @@ const address = [
 
 const Orderlist = (props) => {
   const history = useHistory();
+
   const [Address,setAddress]= useState()
   const [loaded, setloaded] = useState(false);
   const [loadedUser, setloadedUser] = useState(false);
   const [productList, setproductList] = useState([]);
+<<<<<<< HEAD
   const [amount,setamount] = useState()
+=======
+  const [amount,setamount] = useState(0)
+>>>>>>> parent of b660466... add
   const [user_id,setuser_id] = useState(0)
-  const [shipping,setshipping] = useState()
+  const [shipping,setshipping] = useState('Kerry')
   const [productID,setproductID] = useState()
   const [productSName,setproductSName] = useState('')
   const [price,setprice] = useState(0)
   const [productOb, setproductOb] = useState();
   const [optionOb, setoptionOb] = useState();
+  const [shippingOb, setshippingOb] = useState();
   const [orderbig, setorderbig] = useState();
-  
   const addAddress= (event) =>{
       console.log(event.target.value)
       let obj = address.find(o => o.address_id == event.target.value);
@@ -134,7 +136,19 @@ const Orderlist = (props) => {
   }
   const [p, setp] = useState(1);
   const  addtodatabase = () =>{
-      axios.post('https://ordermodule.herokuapp.com/createOrder', {
+      axios.post('http://localhost:8080/createOrder', {
+<<<<<<< HEAD
+          user_id: user_id,
+          product: productList,
+          address: Address,
+        })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+      axios.post('https://c32eb82ab3fb.ngrok.io/shipping/order', {
+=======
+>>>>>>> parent of b660466... add
           user_id: user_id,
           product: productList,
           address: Address,
@@ -165,17 +179,29 @@ const Orderlist = (props) => {
         console.log(productList)
   }
   //console.log(product);
+<<<<<<< HEAD
+  const productVertify = async() => {
+    const res = await axios.get("https://e1062eb5adf1.ngrok.io/product/get/" + productID)
+    console.log(res.data);
+    setproductOb(res.data)
+    if(res.data){
+      setoptionOb(res.data.options[0])
+      setamount(1)
+      if(amount === 1){
+      const ress = await axios.get("https://c32eb82ab3fb.ngrok.io/shipping_option/shop/" + productOb.shop_id)
+      console.log(ress.data); 
+      setshipping(ress.data[0].id)
+      setshippingOb(ress.data)
+=======
   const productVertify = () => {
     let obj = product.find(o => o.id == productID);
     setproductOb(obj)
-    
     console.log(obj)
-    if(obj !== undefined){
+    if(true){
+>>>>>>> parent of b660466... add
       setloaded(true)
-      setoptionOb(obj.options[0])
-      setshipping(shippings[0].id)
-      setamount(1)
       console.log('hello')
+      }
     }else{
       setloaded(false)
     }
@@ -198,81 +224,21 @@ const Orderlist = (props) => {
 
   }
 
-  
-  // const onSubmit = e => {
-  //   e.preventDefault();
-
-  //   if (formValid(this.state)) {
-  //       console.log(this.state)
-  //   } else {
-  //       console.log("Form is invalid!");
-  //   }
-  // };
-
-  // const formValid = ({ isError, ...rest }) => {
-  //   let isValid = false;
-
-  //   Object.values(isError).forEach(val => {
-  //       if (val.length > 0) {
-  //           isValid = false
-  //       } else {
-  //           isValid = true
-  //       }
-  //   });
-
-  //   Object.values(rest).forEach(val => {
-  //       if (val === null) {
-  //           isValid = false
-  //       } else {
-  //           isValid = true
-  //       }
-  //   });
-
-  //   return isValid;
-  // };
-
-  // const formValChange = e => {
-  //     e.preventDefault();
-  //     const { name, value } = e.target;
-  //     let isError = { ...this.state.isError };
-
-  //     switch (name) {
-  //         case "userid":
-  //             isError.name =
-  //                 value.length < 1 ? "Please enter" : "";
-  //             break;
-
-  //         default:
-  //             break;
-  //     }
-
-      // this.setState({
-      //     isError,
-      //     [name]: value
-      // })
-  //};
-  const [isError, setisError] = useState();
-  
-
   return (
     <div className="pb-5">
       <p className="TitleList">Add <a className="blue">Order</a></p>
       <form>
-        <div className="form-row">
+        <div className="row">
           <div className="col-3 ml-4">
-            <div>
-            <label > User ID </label>
+            <label> User ID </label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               placeholder="User Id"
               onChange={(event) => {
                 setuser_id(event.target.value);
-                //formValChange()           
               }}
-           
             ></input>
-              </div>
             <button type="button" className="btn btn-primary mt-2" onClick={() => {UserVertify()}}>Vertify User</button>
             {loadedUser ? (
                    <div className="mt-2">
@@ -310,15 +276,7 @@ const Orderlist = (props) => {
            Amount : {products.amount} Price : {products.price}
          </div>
          <div>Shipping : {products.shipping_option_id}</div>
-         <div className="">
-          <button type="button" className="btn btn-danger mt-2 col mb-0" 
-          onClick={() => {
-            const list = productList
-            list.splice(index,1)
-            console.log(list)
-            setproductList(list)
-            setp(p+1)
-          }}>Delete</button></div>
+       
        </div></div>
         ))}
         <hr color="white" />
@@ -327,10 +285,10 @@ const Orderlist = (props) => {
             <div>
             <div className="mt-2 ml-4">Product</div>
             <div className="row productadd mt-2">
-              <div className="col-3 ml-4">
+              <div className="col-2 ml-4">
                 <label> Id Product</label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
                   placeholder="Product Id"
                   onChange={(event) => {
@@ -338,27 +296,25 @@ const Orderlist = (props) => {
                   }}
                 ></input>
                 <button type="button" className="btn btn-primary mt-2" onClick={() => {productVertify()}}>Vertify</button>
-                { !loaded ? (<div className="alert alert-danger fade show mt-3">product not found</div>) : (<div></div>)}
               </div>
               {loaded ? (
                 <div className="form-row">
                    <div className=" ml-4">
                    <label>Special Name</label>
-                   <select type="text" className="form-control" defaultValue="eror" onChange={(event) => {
+                   <select type="text" className="form-control" onChange={(event) => {
                       addoption(event)
                      }}>
                    {productOb.options.map((item) => (
                         <option value={item.id}>{item.name}</option>
                    ))}
                   </select>
-    
                  </div>
                  <div className=" ml-2">
                 <label> Shipping</label>
                 <select type="text" className="form-control" onChange={(event) => {
                     setshipping(event.target.value);
                   }}>
-                {shippings.map((option) => (
+                {shippingOb.map((option) => (
                   <option value={option.id}>{option.name}</option>
                 ))}
                </select>
@@ -393,30 +349,16 @@ const Orderlist = (props) => {
                 </button>
               </div>
             </div>
-            {loaded && loadedUser ? (
-              <div className="text-center">
-              <button
-                    type="button"
-                    className="btn btn-success col-8 mt-5 ml-4"
-                    onClick={() => {
-                     addtodatabase();
-                    }}
-                  >
-                    Submit
-                  </button></div>
-            ): (
-              <div className="text-center">
+            <div className="text-center">
             <button
                   type="button"
                   className="btn btn-success col-8 mt-5 ml-4"
                   onClick={() => {
                    addtodatabase();
                   }}
-                disabled>
+                >
                   Submit
                 </button></div>
-            )}
-            
           </div>
       </form>
     </div>
